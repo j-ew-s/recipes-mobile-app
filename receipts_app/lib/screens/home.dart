@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
 import 'package:receiptsapp/services/receipt-service.dart';
+import 'package:receiptsapp/widgets/receipt-boxed-card.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _HomeState extends State<Home> {
   List<ReceiptModel> receipts;
   // Armazena o widget de acordo com receipts
   Widget listWidget;
+
+  List<Widget> listOfWidget = new List<Widget>();
 
 
   // Buscar as receitas
@@ -27,6 +30,17 @@ class _HomeState extends State<Home> {
     setState(() {
       receipts = response;
     });
+
+    if(receipts != null) {
+      print('in');
+      receipts.forEach((element) {
+        print(element.name);
+        setState(() {
+          listOfWidget.add(ReceiptBoxedCard(receipt: element));
+        });
+      });
+    }
+
 
   }
 
@@ -51,46 +65,21 @@ class _HomeState extends State<Home> {
       listWidget = GridView.count(
         primary: false,
         padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
         crossAxisCount: 2,
-        children: <Widget>[
-          
-          ListView.builder(
-            
-            itemCount: receipts.length,
-            itemBuilder: (context, index){
-
-              return Container(
-                child: Column(
-                  children: <Widget>[
-                    Text('${receipts[index].name}'),
-                    SizedBox(height: 5,),
-                    FlatButton.icon(
-                        onPressed: (){},
-                        icon: Icon(Icons.link),
-                        label: Text('${receipts[index].link}')
-                    ),
-                  ],
-                ),
-              );
-
-            },
-          )
-        ],
+        children: listOfWidget,
       );
     }
     else{
       listWidget = Text(' Não há receitas cadastradas.');
     }
 
-
-
     // Cria o Widget da página
     // Utiliza a variável listWidget que foi atribuida à cima.
     return Scaffold(
               appBar: AppBar(
-
+                backgroundColor: Colors.purple[700],
               ),
               body: listWidget,
               floatingActionButton: FloatingActionButton(
