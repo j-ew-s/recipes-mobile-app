@@ -24,7 +24,6 @@ class _HomeState extends State<Home> {
 
     List<ReceiptModel> response = await receipt.getAll();
 
-
     setState(() {
       receipts = response;
     });
@@ -49,20 +48,36 @@ class _HomeState extends State<Home> {
     // Depenendo da condição, atribui à variavel listWidget o Widget selecionado.
     if(receipts != null)
     {
-      listWidget = ListView.builder(
-        itemCount: receipts.length,
-        itemBuilder: (context, index)
-        {
-          return Padding(
-            padding:  const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
-            child: Card(
-              child: ListTile(
-                onTap: (){},
-                title: Text(receipts[index].name),
-              ),
-            ),
-          );
-        },
+      listWidget = GridView.count(
+        primary: false,
+        padding: const EdgeInsets.all(20),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        crossAxisCount: 2,
+        children: <Widget>[
+          
+          ListView.builder(
+            
+            itemCount: receipts.length,
+            itemBuilder: (context, index){
+
+              return Container(
+                child: Column(
+                  children: <Widget>[
+                    Text('${receipts[index].name}'),
+                    SizedBox(height: 5,),
+                    FlatButton.icon(
+                        onPressed: (){},
+                        icon: Icon(Icons.link),
+                        label: Text('${receipts[index].link}')
+                    ),
+                  ],
+                ),
+              );
+
+            },
+          )
+        ],
       );
     }
     else{
