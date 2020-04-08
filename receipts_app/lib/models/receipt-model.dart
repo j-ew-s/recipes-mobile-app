@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ReceiptModel{
 
   String id;
@@ -63,6 +65,18 @@ class ReceiptModel{
         rate: json['Rate'] as int,
         tags: new List<String>.from(json['Tags'])
     );
+  }
+
+  String toJson() {
+      return json.encode({
+        'id': this.id,
+        'name': this.name,
+        'description': this.description,
+        'link': this.link,
+        'rate': this.rate,
+        'tags': this.tags,
+      });
+
   }
 
 

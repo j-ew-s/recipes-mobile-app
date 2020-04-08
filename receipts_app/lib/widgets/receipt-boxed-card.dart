@@ -108,7 +108,7 @@ class ReceiptBoxedCard extends StatelessWidget{
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    '${receipt.getDescriptionSized(38)}',
+                    '${receipt.getDescriptionSized(20)}',
                     style: TextStyle(
                         fontSize: 15,
                         fontStyle: FontStyle.normal,

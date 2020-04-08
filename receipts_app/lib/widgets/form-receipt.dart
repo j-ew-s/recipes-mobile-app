@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/services/receipt-service.dart';
 import 'package:receiptsapp/style/text-decoration.dart';
 
 class FormReceipt extends StatefulWidget {
@@ -25,8 +26,11 @@ class _FormReceiptState extends State<FormReceipt> {
   Widget message;
   String buttonsText = 'Atualizar';
 
+  ReceiptService receiptService = ReceiptService();
+
   @override
   Widget build(BuildContext context) {
+
 
     if(receipt.id.isNotEmpty){
       message = Text('ID da Receita :  ${receipt.id}');
@@ -169,10 +173,25 @@ class _FormReceiptState extends State<FormReceipt> {
                               ),
                               onPressed: () async{
                                 if(_formKey.currentState.validate()){
-                                  print(_name);
-                                  print(_description);
-                                  print(_link);
-                                  print(_rate);
+
+                                  receipt.id = _id ?? receipt.id;
+                                  receipt.name = _name ?? receipt.name;
+                                  receipt.description = _description ?? receipt.description;
+                                  receipt.link = _link ?? receipt.link;
+                                  receipt.rate = _rate ?? receipt.rate;
+                                  receipt.tags = receipt.tags;
+
+                                  bool result = await receiptService.createOrUpdate(receipt);
+
+                                  if(result) {
+                                    print('PUSH REPLACEMENTE');
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, '/', (r) => false);
+                                  }
+                                  else{
+                                    print('parece que nao');
+                                  }
+
                                 }
                               },
                             ),
