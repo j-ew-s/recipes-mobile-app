@@ -35,9 +35,28 @@ class _DetailReceiptState extends State<DetailReceipt> {
           backgroundColor: Colors.purple[700],
           title: Text('${receipt.name} details'),
           actions: <Widget>[
-            Icon(
-              Icons.edit,
-              color: Colors.white ,
+            FlatButton.icon(
+              icon: Icon(
+                Icons.edit,
+                color: Colors.white ,
+                ),
+              onPressed: (){
+                Navigator.pushNamed(context, '/edit-receipt', arguments:  receipt
+                );
+              },
+              label: Text(''),
+            ),
+
+            FlatButton.icon(
+              icon: Icon(
+                Icons.restore_from_trash,
+                color: Colors.red[300] ,
+              ),
+              onPressed: (){
+                Navigator.pushNamed(context, '/edit-receipt', arguments:  receipt
+                );
+              },
+              label: Text(''),
             )
           ],
         ),

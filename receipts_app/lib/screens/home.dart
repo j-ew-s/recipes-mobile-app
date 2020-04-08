@@ -32,9 +32,7 @@ class _HomeState extends State<Home> {
     });
 
     if(receipts != null) {
-      print('in');
       receipts.forEach((element) {
-        print(element.name);
         setState(() {
           listOfWidget.add(ReceiptBoxedCard(receipt: element));
         });

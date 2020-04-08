@@ -4,13 +4,6 @@ import 'dart:convert' as convert;
 
 class ReceiptService{
 
-  String id;
-  String name;
-  String description;
-  String link;
-  int rate;
-  List<String> tags;
-
   ReceiptService();
 
 
@@ -38,30 +31,11 @@ class ReceiptService{
 
           var bodyReceipts = body['receipts'];
 
-
-
           list = (bodyReceipts as List).map((i) =>
               ReceiptModel.fromJson(i)
           ).toList();
 
           return list;
-        }
-        else {
-          print(response.body);
-
-          List<String> tags = new List<String>();
-          tags.add('a');
-          tags.add('b');
-
-          ReceiptModel new1 = ReceiptModel();
-          new1.id = '12';
-          new1.name = 'Nome 1';
-          new1.description = 'desc 1';
-          new1.link = 'http://google.com';
-          new1.rate = 3;
-          new1.tags = tags;
-
-          list.add(new1);
         }
 
         return list;
@@ -73,17 +47,46 @@ class ReceiptService{
      }
   }
 
-  // Busca todas as receipts
+  // Busca uma Receipt especifica por ID
   //
   // Api utiliza:
   //  Verbo :  Get
-  //  URL :    /receipts
-  //  Params : não existe parametros
+  //  URL :    /receipts/<id>
+  //  Params : ID do tipo string
   //
-  // Retorna uma lista de ReceiptModel
-  void getById(String id) async {
+  // Retorna uma ReceiptModel
+  Future<ReceiptModel> getById(String id) async {
 
-    Response response = await get('');
+    var url = 'http://10.0.2.2:8061/receipts/$id';
+
+    print(url);
+
+    try{
+
+      ReceiptModel receipt ;
+
+      Response response = await get(url);
+
+      if(response.statusCode == 200){
+
+        var body = convert.jsonDecode(response.body);
+        print(body);
+        var bodyReceipts = body['receipt'];
+
+        receipt = bodyReceipts.map((i) =>
+            ReceiptModel.fromJson(i)
+        );
+
+        return receipt;
+      }
+
+      return null;
+
+    }
+    catch(e){
+      print(e.toString());
+      return null;
+    }
 
   }
 
