@@ -178,7 +178,7 @@ class ReceiptService{
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
   Future<bool> _create(ReceiptModel receipt) async {
-    
+
     var url = 'http://10.0.2.2:8061/receipts/';
     Map<String, String> headers = {"Content-type": "application/json"};
 
@@ -225,6 +225,9 @@ class ReceiptService{
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
   Future<bool> _update(ReceiptModel receipt) async {
+
+    print(receipt);
+    print(receipt.toJson());
 
     var url = 'http://10.0.2.2:8061/receipts/${receipt.id}';
     Map<String, String> headers = {"Content-type": "application/json"};

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReceiptBoxedCard extends StatelessWidget{
 
@@ -24,6 +25,14 @@ class ReceiptBoxedCard extends StatelessWidget{
     }
 
     return description;
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -83,6 +92,7 @@ class ReceiptBoxedCard extends StatelessWidget{
                 FlatButton.icon(
                   onPressed: (){
                     print('link');
+                    _launchURL(receipt.link);
                   },
                     icon: Icon(
                       Icons.link,

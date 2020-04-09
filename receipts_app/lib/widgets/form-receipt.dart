@@ -16,11 +16,12 @@ class _FormReceiptState extends State<FormReceipt> {
   ReceiptModel receipt;
   _FormReceiptState({this.receipt});
 
+
   final _formKey = GlobalKey<FormState>();
-  String _id = '';
-  String _name = '';
-  String _description = '';
-  String _link = ' ';
+  String _id ;
+  String _name ;
+  String _description ;
+  String _link ;
   int _rate = 1;
   List<String> _tags = List<String>();
   Widget message;
@@ -31,6 +32,8 @@ class _FormReceiptState extends State<FormReceipt> {
 
   @override
   Widget build(BuildContext context) {
+
+    print(receipt.toJson());
 
     if(receipt.id != null){
       message = Text('ID da Receita :  ${receipt.id}');
@@ -186,12 +189,15 @@ class _FormReceiptState extends State<FormReceipt> {
                                 if(_formKey.currentState.validate()){
 
                                   receipt.id = _id ?? receipt.id;
+                                  print(_name);
                                   receipt.name = _name ?? receipt.name;
                                   receipt.description = _description ?? receipt.description;
+                                  print(_link);
                                   receipt.link = _link ?? receipt.link;
                                   receipt.rate = _rate ?? receipt.rate;
                                   receipt.tags = _tags ?? receipt.tags;
 
+                                  print(receipt.toJson());
 
                                   bool result = await receiptService.createOrUpdate(receipt);
 
