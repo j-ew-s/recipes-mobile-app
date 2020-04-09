@@ -16,6 +16,7 @@ class _CreateReceiptState extends State<CreateReceipt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.purple[500],
       appBar: AppBar(
         actions: <Widget>[
           FlatButton.icon(

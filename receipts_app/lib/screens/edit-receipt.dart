@@ -39,6 +39,7 @@ class _EditReceiptState extends State<EditReceipt> {
       }
       else{
         return Scaffold(
+          backgroundColor: Colors.purple[500],
           appBar: AppBar(
             title: Text('Atualizando :  ${receipt.name}'),
             backgroundColor: Colors.purple[700],

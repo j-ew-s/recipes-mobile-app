@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
 import 'package:receiptsapp/services/receipt-service.dart';
 import 'package:receiptsapp/style/text-decoration.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class FormReceipt extends StatefulWidget {
 
@@ -22,7 +24,8 @@ class _FormReceiptState extends State<FormReceipt> {
   String _name ;
   String _description ;
   String _link ;
-  int _rate = 1;
+  int _rate = 0;
+  bool firstLoad = true;
   List<String> _tags = List<String>();
   Widget message;
   Widget cancelButton;
@@ -37,12 +40,15 @@ class _FormReceiptState extends State<FormReceipt> {
 
     if(receipt.id != null){
       message = Text('ID da Receita :  ${receipt.id}');
+      if(firstLoad) {
+        _rate = _rate == 0 ? receipt.rate : 1;
+        firstLoad = false;
+      }
     }else{
       message = Text('Criando uma nova receita');
       setState(() {
         buttonsText = 'Adicionar';
       });
-
     }
 
     if(receipt.id != null){
@@ -157,7 +163,7 @@ class _FormReceiptState extends State<FormReceipt> {
                               ),
                             )
                         ),
-                        Slider(
+                       /* Slider(
                           min: 1.0,
                           max: 5.0,
                           divisions: 5,
@@ -167,7 +173,85 @@ class _FormReceiptState extends State<FormReceipt> {
                             });
                           },
                           value: (_rate ?? receipt.rate).toDouble(),
-                        ),
+                        ),*/
+                      
+                    Row(
+                        children: <Widget>[
+
+                          Expanded(
+                            child:  FlatButton.icon(
+                                onPressed: (){
+                                  setState(() {
+                                    _rate = 1;
+                                  });
+                                },
+                                icon: new Icon(
+                                  Icons.sentiment_very_dissatisfied,
+                                  color: _rate == 1 ? Colors.red[300] : Colors.grey[300],
+                                ),
+                                label: Text('')),
+                          ),
+
+                          Expanded(
+                            child: FlatButton.icon(
+                                onPressed: (){
+                                  setState(() {
+                                    _rate = 2;
+                                  });
+                                },
+                                icon: new Icon(
+                                  Icons.sentiment_dissatisfied,
+                                  color: _rate == 2 ? Colors.red[200] : Colors.grey[300],
+                                ),
+                                label: Text('')),
+                          ),
+
+                          Expanded(
+                            child: FlatButton.icon(
+                                onPressed: (){
+                                  setState(() {
+                                    _rate = 3;
+                                  });
+                                },
+                                icon: new Icon(
+                                  Icons.sentiment_neutral,
+                                  color: _rate == 3 ? Colors.blue[300] : Colors.grey[300],
+                                ),
+                                label: Text('')),
+                          ),
+
+                          Expanded(
+                            child:FlatButton.icon(
+                                onPressed: (){
+                                  setState(() {
+                                    _rate = 4;
+                                  });
+                                },
+                                icon: new Icon(
+                                  Icons.sentiment_satisfied,
+                                  color: _rate == 4 ? Colors.green[300] : Colors.grey[300],
+                                ),
+                                label: Text('')),
+                          ),
+
+                          Expanded(
+                            child: FlatButton.icon(
+                                onPressed: (){
+                                  setState(() {
+                                    _rate = 5;
+                                  });
+                                },
+                                icon: new Icon(
+                                  Icons.sentiment_very_satisfied,
+                                  color: _rate == 5 ? Colors.green[500] : Colors.grey[300],
+                                ),
+                                label: Text('')),
+                          ),
+
+                        ],
+                    ),
+
+
 
                         // Botao
                         SizedBox(height: 30.0),
