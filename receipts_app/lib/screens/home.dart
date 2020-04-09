@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
 import 'package:receiptsapp/services/receipt-service.dart';
+import 'package:receiptsapp/widgets/loading.dart';
 import 'package:receiptsapp/widgets/receipt-boxed-card.dart';
 
 class Home extends StatefulWidget {
@@ -70,7 +71,7 @@ class _HomeState extends State<Home> {
       );
     }
     else{
-      listWidget = Text(' Não há receitas cadastradas.');
+      listWidget = Loading();
     }
 
     // Cria o Widget da página
@@ -78,6 +79,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.purple[700],
+                title: Text('Suas receitas :) '),
+                centerTitle: true,
               ),
               body: listWidget,
               floatingActionButton: FloatingActionButton(

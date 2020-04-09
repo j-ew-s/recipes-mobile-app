@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/screens/delete-confirmation-receipt.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 
 class DetailReceipt extends StatefulWidget {
@@ -11,9 +12,21 @@ class DetailReceipt extends StatefulWidget {
 class _DetailReceiptState extends State<DetailReceipt> {
 
   ReceiptModel receipt;
+  String id;
 
   @override
   Widget build(BuildContext context) {
+
+    void _showSettings(String id){
+
+      showModalBottomSheet(context: context, builder: (context){
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+          child: DeleteConfirmationReceipt(id: id),
+        );
+      });
+
+    }
 
 
    var passedArgument = ModalRoute.of(context).settings.arguments;
@@ -53,8 +66,7 @@ class _DetailReceiptState extends State<DetailReceipt> {
                 color: Colors.red[300] ,
               ),
               onPressed: (){
-                Navigator.pushNamed(context, '/edit-receipt', arguments:  receipt
-                );
+               _showSettings(receipt.id);
               },
               label: Text(''),
             )

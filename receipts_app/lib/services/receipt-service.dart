@@ -91,65 +91,120 @@ class ReceiptService{
   }
 
 
-  // Busca uma Receipt especifica por ID
+  // Cria ou Atualiza uma Receita
   //
-  // Api utiliza:
-  //  Verbo :  Get
-  //  URL :    /receipts/<id>
-  //  Params : ID do tipo string
+  // Se o ReceiptModel recebido como parametro
+  //    Possuir id entao chama _update
+  //    Não possuir id então chama _create
   //
-  // Retorna uma ReceiptModel
+  // Retorna um bool indicando
+  //    true  : ação executada com sucesso
+  //    false : ação obteve erro
   Future<bool> createOrUpdate(ReceiptModel receipt) async {
-    print(receipt);
+
     if(receipt.id.isEmpty){
-      print('AAA');
+
       return await  _create(receipt);
+
     }
     else{
-      print('BBB');
+
       return await _update(receipt);
+
     }
 
   }
 
-  // Busca uma Receipt especifica por ID
+  // Remove uma receipt por seu ID
   //
   // Api utiliza:
-  //  Verbo :  Get
+  //  Verbo :  DELETE
   //  URL :    /receipts/<id>
   //  Params : ID do tipo string
   //
-  // Retorna uma ReceiptModel
-  Future<bool> _create(ReceiptModel receipt) async {
+  // Retorna um bool indicando
+  //    true  : ação executada com sucesso
+  //    false : ação obteve erro
+  Future<bool> deleteReceipt(String id) async {
 
-    var url = 'http://10.0.2.2:8061/receipts/';
+    if(id.isEmpty){
+      return false;
+    }
+    else{
+      try{
 
-    print(url);
+        var url = 'http://10.0.2.2:8061/receipts/$id';
 
-    try{
+        ReceiptModel receipt ;
 
-      ReceiptModel receipt ;
+        Response response = await delete(
+          url,
+          headers:  { 'Content-type': 'application/json',
+            'Accept': 'application/json'},
+        );
 
-      Response response = await post(
-        url,
-        body: receipt,
-        headers:  { 'Content-type': 'application/json',
-        'Accept': 'application/json'},
-      );
+        if(response.statusCode == 200){
+          return true;
+        }
+        else{
+          print(response.body);
+          print(response.statusCode);
+          print(response.runtimeType);
 
-      if(response.statusCode == 201){
+          return false;
+        }
 
-        print('newwwwwwwwwwww');
-
-        return true;
       }
-      else{
-        print(response.body);
-        print(response.statusCode);
-        print(response.runtimeType);
-
+      catch(e ){
+        print(e.toString());
         return false;
       }
+    }
+
+  }
+
+  // Cria uma nova receita
+  //
+  // Api utiliza:
+  //  Verbo :  POST
+  //  URL :    /receipts/<id>
+  //  Params : ID do tipo string
+  //  Body : receitps ( formato json)
+  //  HTTP Status de sucesso : 201
+  //
+  // Retorna um bool indicando
+  //    true  : ação executada com sucesso
+  //    false : ação obteve erro
+  Future<bool> _create(ReceiptModel receipt) async {
+
+           var url = 'http://10.0.2.2:8061/receipts/';
+
+        print(url);
+
+        try{
+
+          ReceiptModel receipt ;
+
+          Response response = await post(
+            url,
+            body: receipt,
+            headers:  { 'Content-type': 'application/json',
+              'Accept': 'application/json'},
+          );
+
+          if(response.statusCode == 201){
+
+            print('newwwwwwwwwwww');
+
+            return true;
+          }
+          else{
+            print(response.body);
+            print(response.statusCode);
+            print(response.runtimeType);
+
+            return false;
+          }
 
     }
     catch(e){
@@ -160,14 +215,18 @@ class ReceiptService{
   }
 
 
-  // Busca uma Receipt especifica por ID
+  // Atualiza uma receita
   //
   // Api utiliza:
-  //  Verbo :  Get
+  //  Verbo :  PUT
   //  URL :    /receipts/<id>
   //  Params : ID do tipo string
+  //  Body : receitps ( formato json)
+  //  HTTP Status sucesso : 200
   //
-  // Retorna uma ReceiptModel
+  // Retorna um bool indicando
+  //    true  : ação executada com sucesso
+  //    false : ação obteve erro
   Future<bool> _update(ReceiptModel receipt) async {
 
     print(receipt.id);

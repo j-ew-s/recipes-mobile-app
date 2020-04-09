@@ -45,30 +45,18 @@ class ReceiptBoxedCard extends StatelessWidget{
         child: Column(
           children: <Widget>[
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: FlatButton.icon(
-                  onPressed: (){
-                    print('clicked');
-                    Navigator.pushNamed(
-                        context,
-                        '/detail-receipt',
-                        arguments: receipt
-                    );
-                  },
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child:  Text(
+                      '${receipt.getNameSized(15)}',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color:  Colors.white
+                      ),
+                    )
 
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    size: 10.0,
-                    color: Colors.grey[500],
-                  ),
-                  label: Text(
-                    '${receipt.getNameSized(10)}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color:  Colors.white
-                    ),
-                  )
               ),
             ),
 
