@@ -189,15 +189,11 @@ class _FormReceiptState extends State<FormReceipt> {
                                 if(_formKey.currentState.validate()){
 
                                   receipt.id = _id ?? receipt.id;
-                                  print(_name);
                                   receipt.name = _name ?? receipt.name;
                                   receipt.description = _description ?? receipt.description;
-                                  print(_link);
                                   receipt.link = _link ?? receipt.link;
                                   receipt.rate = _rate ?? receipt.rate;
                                   receipt.tags = _tags ?? receipt.tags;
-
-                                  print(receipt.toJson());
 
                                   bool result = await receiptService.createOrUpdate(receipt);
 
