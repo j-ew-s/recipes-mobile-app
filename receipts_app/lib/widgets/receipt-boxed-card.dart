@@ -29,7 +29,7 @@ class ReceiptBoxedCard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    List<Color> _colors = [Colors.purple[50], Colors.purple[500]];
+    List<Color> _colors = [Colors.purple[200], Colors.purple[500]];
 
     return Container(
       decoration: new BoxDecoration(
@@ -67,7 +67,11 @@ class ReceiptBoxedCard extends StatelessWidget{
 
                 FlatButton.icon(
                   onPressed: (){
-                    print('red eye');
+                    Navigator.pushNamed(
+                        context,
+                        '/detail-receipt',
+                        arguments: receipt
+                    );
                   },
                   icon: Icon(
                     Icons.remove_red_eye,

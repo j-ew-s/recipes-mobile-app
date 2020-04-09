@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/widgets/form-receipt.dart';
 
 class CreateReceipt extends StatefulWidget {
   @override
@@ -8,65 +9,26 @@ class CreateReceipt extends StatefulWidget {
 
 class _CreateReceiptState extends State<CreateReceipt> {
 
-  ReceiptModel receipt;
+  ReceiptModel receipt = ReceiptModel();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Column(
-            children: <Widget>[
-
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name'
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Name is obligatry';
-                  }
-                  receipt.name = value;
-                  return null;
-                },
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          FlatButton.icon(
+              onPressed: (){
+                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+              },
+              icon: Icon(
+                Icons.cancel
               ),
-
-              TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Description'
-                ),
-                onChanged: (value) => {
-                  receipt.name = value
-                },
-              ),
-
-              TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Link'
-                ),
-                onChanged: (value) => {
-                  receipt.link = value
-                },
-              ),
-
-
-              TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'rate'
-                ),
-                onChanged: (value) => {
-                  receipt.rate = int.parse(value)
-                },
-              ),
-
-
-            ]
-        )
+              label: Text('Cancel')),
+        ],
+      ),
+      body: FormReceipt(receipt: receipt),
     );
   }
 }

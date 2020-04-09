@@ -82,13 +82,16 @@ class _HomeState extends State<Home> {
                 title: Text('Suas receitas :) '),
                 centerTitle: true,
               ),
-              body: listWidget,
+              body: Container(
+                child: listWidget,
+                color: Colors.purple[800],
+              ),
               floatingActionButton: FloatingActionButton(
                 child: Icon(
                   Icons.add
                 ),
                 onPressed: (){
-
+                  Navigator.pushNamedAndRemoveUntil(context, '/create-receipt', (route) => false);
                 },
               ),
             );

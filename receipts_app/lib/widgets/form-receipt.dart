@@ -17,13 +17,14 @@ class _FormReceiptState extends State<FormReceipt> {
   _FormReceiptState({this.receipt});
 
   final _formKey = GlobalKey<FormState>();
-  String _id;
-  String _name;
-  String _description;
-  String _link;
-  int _rate;
-  List<String> tags;
+  String _id = '';
+  String _name = '';
+  String _description = '';
+  String _link = ' ';
+  int _rate = 1;
+  List<String> _tags = List<String>();
   Widget message;
+  Widget cancelButton;
   String buttonsText = 'Atualizar';
 
   ReceiptService receiptService = ReceiptService();
@@ -31,8 +32,7 @@ class _FormReceiptState extends State<FormReceipt> {
   @override
   Widget build(BuildContext context) {
 
-
-    if(receipt.id.isNotEmpty){
+    if(receipt.id != null){
       message = Text('ID da Receita :  ${receipt.id}');
     }else{
       message = Text('Criando uma nova receita');
@@ -40,6 +40,28 @@ class _FormReceiptState extends State<FormReceipt> {
         buttonsText = 'Adicionar';
       });
 
+    }
+
+    if(receipt.id != null){
+      cancelButton =  RaisedButton(
+        color: Colors.red,
+        child: Text(
+          'Cancelar',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () async{
+          print('cancel');
+          if(_formKey.currentState.validate()){
+            Navigator.pop(context);
+          }
+        },
+      );
+    }
+    else{
+
+      cancelButton = Container(
+        child: Text(''),
+      );
     }
 
     return LayoutBuilder(
@@ -74,7 +96,7 @@ class _FormReceiptState extends State<FormReceipt> {
                         ),
                         TextFormField(
                           decoration: textInputDecoration,
-                          initialValue: receipt.name,
+                          initialValue: receipt.name ?? '',
                           validator : (val) => val.isEmpty ? 'Nome da receita é obrigatório!' : null,
                           onChanged : (val) => setState(() => _name = val),
                         ),
@@ -150,18 +172,7 @@ class _FormReceiptState extends State<FormReceipt> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children:[
 
-                              RaisedButton(
-                                color: Colors.red,
-                                child: Text(
-                                  'Cancelar',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () async{
-                                  if(_formKey.currentState.validate()){
-                                      Navigator.pop(context);
-                                  }
-                                },
-                              ),
+                              cancelButton,
 
                               SizedBox(width: 30,),
 
@@ -179,12 +190,13 @@ class _FormReceiptState extends State<FormReceipt> {
                                   receipt.description = _description ?? receipt.description;
                                   receipt.link = _link ?? receipt.link;
                                   receipt.rate = _rate ?? receipt.rate;
-                                  receipt.tags = receipt.tags;
+                                  receipt.tags = _tags ?? receipt.tags;
+
 
                                   bool result = await receiptService.createOrUpdate(receipt);
 
                                   if(result) {
-                                    print('PUSH REPLACEMENTE');
+
                                     Navigator.pushNamedAndRemoveUntil(
                                         context, '/', (r) => false);
                                   }

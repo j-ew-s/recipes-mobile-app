@@ -57,13 +57,15 @@ class ReceiptModel{
 
   factory ReceiptModel.fromJson(dynamic json) {
 
+    List<String> tags = json['Tags'] != null ? new List<String>.from(json['Tags']) : new List<String>();
+
     return ReceiptModel(
         id:  json['ID'] as String,
         name: json['Name'] as String ,
         description: json['Description'] as String,
         link: json['Link'] as String,
         rate: json['Rate'] as int,
-        tags: new List<String>.from(json['Tags'])
+        tags: tags
     );
   }
 
@@ -76,6 +78,16 @@ class ReceiptModel{
         'rate': this.rate,
         'tags': this.tags,
       });
+
+  }
+  String toJsonInsert() {
+    return json.encode({
+      'name': this.name,
+      'description': this.description,
+      'link': this.link,
+      'rate': this.rate,
+      'tags': this.tags,
+    });
 
   }
 

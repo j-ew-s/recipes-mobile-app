@@ -31,9 +31,13 @@ class ReceiptService{
 
           var bodyReceipts = body['receipts'];
 
-          list = (bodyReceipts as List).map((i) =>
-              ReceiptModel.fromJson(i)
-          ).toList();
+          if(bodyReceipts != null) {
+
+            list = (bodyReceipts as List).map((i) =>
+                ReceiptModel.fromJson(i)
+            ).toList();
+
+          }
 
           return list;
         }
@@ -59,8 +63,6 @@ class ReceiptService{
 
     var url = 'http://10.0.2.2:8061/receipts/$id';
 
-    print(url);
-
     try{
 
       ReceiptModel receipt ;
@@ -70,7 +72,7 @@ class ReceiptService{
       if(response.statusCode == 200){
 
         var body = convert.jsonDecode(response.body);
-        print(body);
+
         var bodyReceipts = body['receipt'];
 
         receipt = bodyReceipts.map((i) =>
@@ -176,36 +178,31 @@ class ReceiptService{
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
   Future<bool> _create(ReceiptModel receipt) async {
+    
+    var url = 'http://10.0.2.2:8061/receipts/';
+    Map<String, String> headers = {"Content-type": "application/json"};
 
-           var url = 'http://10.0.2.2:8061/receipts/';
+    try{
 
-        print(url);
+      Response response = await post(
+        url,
+        body: receipt.toJsonInsert(),
+        headers:  headers,
+      );
 
-        try{
+      if(response.statusCode == 200){
 
-          ReceiptModel receipt ;
+        print('newwwwwwwwwwww');
 
-          Response response = await post(
-            url,
-            body: receipt,
-            headers:  { 'Content-type': 'application/json',
-              'Accept': 'application/json'},
-          );
+        return true;
+      }
+      else{
+        print(response.body);
+        print(response.statusCode);
+        print(response.runtimeType);
 
-          if(response.statusCode == 201){
-
-            print('newwwwwwwwwwww');
-
-            return true;
-          }
-          else{
-            print(response.body);
-            print(response.statusCode);
-            print(response.runtimeType);
-
-            return false;
-          }
-
+        return false;
+      }
     }
     catch(e){
       print(e.toString());
@@ -229,11 +226,8 @@ class ReceiptService{
   //    false : ação obteve erro
   Future<bool> _update(ReceiptModel receipt) async {
 
-    print(receipt.id);
-    
     var url = 'http://10.0.2.2:8061/receipts/${receipt.id}';
     Map<String, String> headers = {"Content-type": "application/json"};
-    print(url);
 
     try{
 
