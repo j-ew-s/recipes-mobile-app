@@ -104,7 +104,7 @@ class ReceiptService{
   //    false : ação obteve erro
   Future<bool> createOrUpdate(ReceiptModel receipt) async {
 
-    if(receipt.id.isEmpty){
+    if(receipt.id == null){
 
       return await  _create(receipt);
 
@@ -136,8 +136,6 @@ class ReceiptService{
       try{
 
         var url = 'http://10.0.2.2:8061/receipts/$id';
-
-        ReceiptModel receipt ;
 
         Response response = await delete(
           url,
