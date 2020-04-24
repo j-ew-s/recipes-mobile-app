@@ -27,7 +27,7 @@ class _CreateReceiptState extends State<CreateReceipt> {
               label: Text('Cancel')),
         ],
       ),
-      body: FormReceipt(receipt: receipt),
+      body: FormRecipe(recipe: receipt),
     );
   }
 }

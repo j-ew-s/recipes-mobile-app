@@ -4,18 +4,18 @@ import 'package:receiptsapp/services/recipe-service.dart';
 import 'package:receiptsapp/style/text-decoration.dart';
 
 
-class FormReceipt extends StatefulWidget {
+class FormRecipe extends StatefulWidget {
 
-  final RecipeModel receipt;
-  FormReceipt({this.receipt});
+  final RecipeModel recipe;
+  FormRecipe({this.recipe});
   @override
-  _FormReceiptState createState() => _FormReceiptState(receipt: receipt);
+  _FormRecipeState createState() => _FormRecipeState(recipe: recipe);
 }
 
-class _FormReceiptState extends State<FormReceipt> {
+class _FormRecipeState extends State<FormRecipe> {
 
-  RecipeModel receipt;
-  _FormReceiptState({this.receipt});
+  RecipeModel recipe;
+  _FormRecipeState({this.recipe});
 
 
   final _formKey = GlobalKey<FormState>();
@@ -30,17 +30,15 @@ class _FormReceiptState extends State<FormReceipt> {
   Widget cancelButton;
   String buttonsText = 'Atualizar';
 
-  RecipeService receiptService = RecipeService();
+  RecipeService recipeService = RecipeService();
 
   @override
   Widget build(BuildContext context) {
 
-    print(receipt.toJson());
-
-    if(receipt.id != null){
-      message = Text('ID da Receita :  ${receipt.id}');
+    if(recipe.id != null){
+      message = Text('ID da Receita :  ${recipe.id}');
       if(firstLoad) {
-        _rate = _rate == 0 ? receipt.rate : 1;
+        _rate = _rate == 0 ? recipe.rate : 1;
         firstLoad = false;
       }
     }else{
@@ -50,7 +48,7 @@ class _FormReceiptState extends State<FormReceipt> {
       });
     }
 
-    if(receipt.id != null){
+    if(recipe.id != null){
       cancelButton =  RaisedButton(
         color: Colors.red,
         child: Text(
@@ -104,7 +102,7 @@ class _FormReceiptState extends State<FormReceipt> {
                         ),
                         TextFormField(
                           decoration: textInputDecoration,
-                          initialValue: receipt.name ?? '',
+                          initialValue: recipe.name ?? '',
                           validator : (val) => val.isEmpty ? 'Nome da receita é obrigatório!' : null,
                           onChanged : (val) => setState(() => _name = val),
                         ),
@@ -124,7 +122,7 @@ class _FormReceiptState extends State<FormReceipt> {
                         ),
                         TextFormField(
                           decoration: textInputDecoration,
-                          initialValue: receipt.description,
+                          initialValue: recipe.description,
                           onChanged : (val) => setState(() => _description = val),
                           maxLines: 8,
                         ),
@@ -144,7 +142,7 @@ class _FormReceiptState extends State<FormReceipt> {
                         ),
                         TextFormField(
                           decoration: textInputDecoration,
-                          initialValue: receipt.link,
+                          initialValue: recipe.link,
                           onChanged : (val) => setState(() => _link = val),
                           validator : (val) => val.isEmpty ? 'Link da receita é obrigatório!' : null,
                         ),
@@ -259,14 +257,14 @@ class _FormReceiptState extends State<FormReceipt> {
                               onPressed: () async{
                                 if(_formKey.currentState.validate()){
 
-                                  receipt.id = _id ?? receipt.id;
-                                  receipt.name = _name ?? receipt.name;
-                                  receipt.description = _description ?? receipt.description;
-                                  receipt.link = _link ?? receipt.link;
-                                  receipt.rate = _rate ?? receipt.rate;
-                                  receipt.tags = _tags ?? receipt.tags;
+                                  recipe.id = _id ?? recipe.id;
+                                  recipe.name = _name ?? recipe.name;
+                                  recipe.description = _description ?? recipe.description;
+                                  recipe.link = _link ?? recipe.link;
+                                  recipe.rate = _rate ?? recipe.rate;
+                                  recipe.tags = _tags ?? recipe.tags;
 
-                                  bool result = await receiptService.createOrUpdate(receipt);
+                                  bool result = await recipeService.createOrUpdate(recipe);
 
                                   if(result) {
 
