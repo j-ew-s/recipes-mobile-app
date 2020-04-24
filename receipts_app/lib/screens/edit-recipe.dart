@@ -42,7 +42,7 @@ class _EditReceiptState extends State<EditReceipt> {
             title: Text('Atualizando :  ${receipt.name}'),
             backgroundColor: Colors.purple[700],
           ),
-          body: new FormReceipt(receipt: receipt),
+          body: new FormRecipe(recipe: receipt),
         );
       }
     }

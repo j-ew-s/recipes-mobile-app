@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/widgets/form-recipe.dart';
 
-class CreateReceipt extends StatefulWidget {
+class CreateRecipe extends StatefulWidget {
   @override
-  _CreateReceiptState createState() => _CreateReceiptState();
+  _CreateRecipeState createState() => _CreateRecipeState();
 }
 
-class _CreateReceiptState extends State<CreateReceipt> {
+class _CreateRecipeState extends State<CreateRecipe> {
 
-  RecipeModel receipt = RecipeModel();
+  RecipeModel recipe = RecipeModel();
   
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _CreateReceiptState extends State<CreateReceipt> {
               label: Text('Cancel')),
         ],
       ),
-      body: FormRecipe(recipe: receipt),
+      body: FormRecipe(recipe: recipe),
     );
   }
 }
