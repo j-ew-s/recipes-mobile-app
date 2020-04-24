@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/services/recipe-service.dart';
 import 'package:receiptsapp/widgets/loading.dart';
-import 'package:receiptsapp/widgets/receipt-boxed-card.dart';
+import 'package:receiptsapp/widgets/recipe-boxed-card.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -29,6 +29,8 @@ class _HomeState extends State<Home> {
     List<RecipeModel> response = await receipt.getAll();
 
     setState(() {
+      print("TEmos");
+      print(response);
       receipts = response;
     });
 
@@ -55,8 +57,8 @@ class _HomeState extends State<Home> {
 
     // Verificar qual Widget utilizar
     //
-    // Receipts != null  Então  ListView com itens encontrados.
-    // Receitps == null  Então  Text informando que não foram encontradas receipts.
+    // Recipes != null  Então  ListView com itens encontrados.
+    // Receipes == null  Então  Text informando que não foram encontradas receipts.
     //
     // Depenendo da condição, atribui à variavel listWidget o Widget selecionado.
     if(receipts != null)
@@ -91,7 +93,7 @@ class _HomeState extends State<Home> {
                   Icons.add
                 ),
                 onPressed: (){
-                  Navigator.pushNamedAndRemoveUntil(context, '/create-receipt', (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(context, '/create-recipe', (route) => false);
                 },
               ),
             );

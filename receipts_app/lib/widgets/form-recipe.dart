@@ -274,7 +274,7 @@ class _FormReceiptState extends State<FormReceipt> {
                                         context, '/', (r) => false);
                                   }
                                   else{
-                                    print('parece que nao');
+                                    print('Ocorreu um erro');
                                   }
 
                                 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/recipe-model.dart';
-import 'package:receiptsapp/widgets/form-receipt.dart';
+import 'package:receiptsapp/widgets/form-recipe.dart';
 
 class CreateReceipt extends StatefulWidget {
   @override

@@ -31,7 +31,7 @@ class RecipeService{
 
           var body = convert.jsonDecode(response.body);
 
-          var bodyReceipts = body['receipts'];
+          var bodyReceipts = body['recipes'];
 
           if(bodyReceipts != null) {
 
@@ -42,6 +42,8 @@ class RecipeService{
           }
 
           return list;
+        }else{
+          print("isso é um else");
         }
 
         return list;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/recipe-model.dart';
-import 'package:receiptsapp/screens/delete-confirmation-receipt.dart';
+import 'package:receiptsapp/screens/delete-confirmation-recipe.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 
 class DetailReceipt extends StatefulWidget {
@@ -54,7 +54,7 @@ class _DetailReceiptState extends State<DetailReceipt> {
                 color: Colors.white ,
                 ),
               onPressed: (){
-                Navigator.pushNamed(context, '/edit-receipt', arguments:  receipt
+                Navigator.pushNamed(context, '/edit-recipe', arguments:  receipt
                 );
               },
               label: Text(''),

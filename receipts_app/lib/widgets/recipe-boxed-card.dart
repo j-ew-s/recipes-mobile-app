@@ -60,7 +60,7 @@ class ReceiptBoxedCard extends StatelessWidget{
                   onPressed: (){
                     Navigator.pushNamed(
                         context,
-                        '/detail-receipt',
+                        '/detail-recipe',
                         arguments: receipt
                     );
                   },
