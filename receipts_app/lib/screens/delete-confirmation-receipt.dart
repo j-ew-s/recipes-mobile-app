@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/services/receipt-service.dart';
+import 'package:receiptsapp/services/recipe-service.dart';
 
 class DeleteConfirmationReceipt extends StatefulWidget {
-  String id;
+  
+  final String id;
   DeleteConfirmationReceipt({this.id});
 
 
@@ -14,7 +15,7 @@ class DeleteConfirmationReceipt extends StatefulWidget {
 class _DeleteConfirmationReceiptState extends State<DeleteConfirmationReceipt> {
 
   String id;
-  ReceiptService receiptService = ReceiptService();
+  RecipeService receiptService = RecipeService();
   String errorMessage = '';
 
   _DeleteConfirmationReceiptState({this.id});

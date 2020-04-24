@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/widgets/form-receipt.dart';
 
 class CreateReceipt extends StatefulWidget {
@@ -9,10 +9,8 @@ class CreateReceipt extends StatefulWidget {
 
 class _CreateReceiptState extends State<CreateReceipt> {
 
-  ReceiptModel receipt = ReceiptModel();
-
-  final _formKey = GlobalKey<FormState>();
-
+  RecipeModel receipt = RecipeModel();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

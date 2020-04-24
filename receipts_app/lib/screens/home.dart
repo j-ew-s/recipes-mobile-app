@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   // Lista de Receitas
-  List<ReceiptModel> receipts;
+  List<RecipeModel> receipts;
   // Armazena o widget de acordo com receipts
   Widget listWidget;
 
@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
 
     ReceiptService receipt = ReceiptService();
 
-    List<ReceiptModel> response = await receipt.getAll();
+    List<RecipeModel> response = await receipt.getAll();
 
     setState(() {
       receipts = response;

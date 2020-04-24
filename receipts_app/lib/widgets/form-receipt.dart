@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FormReceipt extends StatefulWidget {
 
-  ReceiptModel receipt;
+  RecipeModel receipt;
   FormReceipt({this.receipt});
   @override
   _FormReceiptState createState() => _FormReceiptState(receipt: receipt);
@@ -15,7 +15,7 @@ class FormReceipt extends StatefulWidget {
 
 class _FormReceiptState extends State<FormReceipt> {
 
-  ReceiptModel receipt;
+  RecipeModel receipt;
   _FormReceiptState({this.receipt});
 
 

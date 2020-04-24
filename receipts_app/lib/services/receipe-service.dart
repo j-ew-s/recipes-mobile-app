@@ -1,10 +1,10 @@
 import 'package:http/http.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
 import 'dart:convert' as convert;
 
-class ReceiptService{
+class RecipeService{
 
-  ReceiptService();
+  RecipeService();
 
   var url = 'http://10.0.2.2:8087/recipes/';
 
@@ -15,12 +15,12 @@ class ReceiptService{
   //  URL :    /receipts
   //  Params : não existe parametros
   //
-  // Retorna uma lista de ReceiptModel
-  Future<List<ReceiptModel>> getAll() async {
+  // Retorna uma lista de RecipeModel
+  Future<List<RecipeModel>> getAll() async {
 
     try{
 
-        List<ReceiptModel> list = new List<ReceiptModel>();
+        List<RecipeModel> list = new List<RecipeModel>();
 
         Response response = await get(this.url);
 
@@ -36,7 +36,7 @@ class ReceiptService{
           if(bodyReceipts != null) {
 
             list = (bodyReceipts as List).map((i) =>
-                ReceiptModel.fromJson(i)
+                RecipeModel.fromJson(i)
             ).toList();
 
           }
@@ -60,14 +60,14 @@ class ReceiptService{
   //  URL :    /receipts/<id>
   //  Params : ID do tipo string
   //
-  // Retorna uma ReceiptModel
-  Future<ReceiptModel> getById(String id) async {
+  // Retorna uma RecipeModel
+  Future<RecipeModel> getById(String id) async {
 
     //var url = 'http://10.0.2.2:8061/receipts/$id';
 
     try{
 
-      ReceiptModel receipt ;
+      RecipeModel receipt ;
 
       Response response = await get(this.url+id);
 
@@ -78,7 +78,7 @@ class ReceiptService{
         var bodyReceipts = body['recipe'];
 
         receipt = bodyReceipts.map((i) =>
-            ReceiptModel.fromJson(i)
+            RecipeModel.fromJson(i)
         );
 
         return receipt;
@@ -97,14 +97,14 @@ class ReceiptService{
 
   // Cria ou Atualiza uma Receita
   //
-  // Se o ReceiptModel recebido como parametro
+  // Se o RecipeModel recebido como parametro
   //    Possuir id entao chama _update
   //    Não possuir id então chama _create
   //
   // Retorna um bool indicando
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
-  Future<bool> createOrUpdate(ReceiptModel receipt) async {
+  Future<bool> createOrUpdate(RecipeModel receipt) async {
 
     if(receipt.id == null){
 
@@ -177,7 +177,7 @@ class ReceiptService{
   // Retorna um bool indicando
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
-  Future<bool> _create(ReceiptModel receipt) async {
+  Future<bool> _create(RecipeModel receipt) async {
 
     //var url = 'http://10.0.2.2:8061/receipts/';
     Map<String, String> headers = {"Content-type": "application/json"};
@@ -191,9 +191,6 @@ class ReceiptService{
       );
 
       if(response.statusCode == 200){
-
-        print('newwwwwwwwwwww');
-
         return true;
       }
       else{
@@ -224,7 +221,7 @@ class ReceiptService{
   // Retorna um bool indicando
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
-  Future<bool> _update(ReceiptModel receipt) async {
+  Future<bool> _update(RecipeModel receipt) async {
 
     print(receipt);
     print(receipt.toJson());

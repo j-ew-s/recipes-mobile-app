@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ReceiptBoxedCard extends StatelessWidget{
 
-  final ReceiptModel receipt;
+  final RecipeModel receipt;
   
   ReceiptBoxedCard({this.receipt});
   

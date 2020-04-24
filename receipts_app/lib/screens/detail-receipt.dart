@@ -11,7 +11,7 @@ class DetailReceipt extends StatefulWidget {
 
 class _DetailReceiptState extends State<DetailReceipt> {
 
-  ReceiptModel receipt;
+  RecipeModel receipt;
   String id;
 
   @override
@@ -36,7 +36,7 @@ class _DetailReceiptState extends State<DetailReceipt> {
    }
    else{
      List<String> aa = new List<String>();
-     receipt = ReceiptModel(tags: aa , rate: 0, link: '', description: '', name: '', id: '');
+     receipt = RecipeModel(tags: aa , rate: 0, link: '', description: '', name: '', id: '');
    }
 
    if(receipt == null){

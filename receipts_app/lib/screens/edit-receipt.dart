@@ -11,7 +11,7 @@ class EditReceipt extends StatefulWidget {
 
 class _EditReceiptState extends State<EditReceipt> {
 
-  ReceiptModel receipt;
+  RecipeModel receipt;
   bool loading = true;
 
   @override
