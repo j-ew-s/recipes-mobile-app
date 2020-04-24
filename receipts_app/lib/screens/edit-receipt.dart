@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
-import 'package:receiptsapp/services/receipt-service.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/widgets/form-receipt.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 
@@ -16,7 +15,6 @@ class _EditReceiptState extends State<EditReceipt> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

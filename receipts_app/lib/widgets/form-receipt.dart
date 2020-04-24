@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
-import 'package:receiptsapp/services/receipt-service.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
+import 'package:receiptsapp/services/recipe-service.dart';
 import 'package:receiptsapp/style/text-decoration.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class FormReceipt extends StatefulWidget {
 
-  RecipeModel receipt;
+  final RecipeModel receipt;
   FormReceipt({this.receipt});
   @override
   _FormReceiptState createState() => _FormReceiptState(receipt: receipt);
@@ -31,7 +30,7 @@ class _FormReceiptState extends State<FormReceipt> {
   Widget cancelButton;
   String buttonsText = 'Atualizar';
 
-  ReceiptService receiptService = ReceiptService();
+  RecipeService receiptService = RecipeService();
 
   @override
   Widget build(BuildContext context) {
@@ -162,19 +161,7 @@ class _FormReceiptState extends State<FormReceipt> {
                                   wordSpacing: 2
                               ),
                             )
-                        ),
-                       /* Slider(
-                          min: 1.0,
-                          max: 5.0,
-                          divisions: 5,
-                          onChanged: (val) {
-                            setState(() {
-                              _rate = val.round();
-                            });
-                          },
-                          value: (_rate ?? receipt.rate).toDouble(),
-                        ),*/
-                      
+                        ),                      
                     Row(
                         children: <Widget>[
 

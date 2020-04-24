@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
-import 'package:receiptsapp/services/receipt-service.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
+import 'package:receiptsapp/services/recipe-service.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 import 'package:receiptsapp/widgets/receipt-boxed-card.dart';
 
@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   // será utilizado para validar qual Widget vai utilizar
   void getAllReceipts() async{
 
-    ReceiptService receipt = ReceiptService();
+    RecipeService receipt = RecipeService();
 
     List<RecipeModel> response = await receipt.getAll();
 

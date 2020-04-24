@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/screens/delete-confirmation-receipt.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 

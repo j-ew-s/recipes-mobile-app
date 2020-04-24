@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:receiptsapp/models/receipt-model.dart';
+import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReceiptBoxedCard extends StatelessWidget{
@@ -7,25 +7,7 @@ class ReceiptBoxedCard extends StatelessWidget{
   final RecipeModel receipt;
   
   ReceiptBoxedCard({this.receipt});
-  
-  String _get(){
 
-    String description= '';
-
-    if(receipt.description != ''  || receipt.description.isNotEmpty){
-
-      int descriptionLength = receipt.description.length;
-
-      if(descriptionLength > 25){
-        description = receipt.description.substring(0,25) + '...';
-      }
-      else{
-        description = receipt.description;
-      }
-    }
-
-    return description;
-  }
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
