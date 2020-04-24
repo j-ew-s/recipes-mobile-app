@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class ReceiptModel{
+class RecipeModel{
 
   String id;
   String name;
@@ -9,7 +9,7 @@ class ReceiptModel{
   int rate;
   List<String> tags;
 
-  ReceiptModel({this.id, this.name, this.description, this.link, this.rate, this.tags});
+  RecipeModel({this.id, this.name, this.description, this.link, this.rate, this.tags});
 
 
   // Gets Description property value sized by a parameter.
@@ -55,11 +55,11 @@ class ReceiptModel{
   }
 
 
-  factory ReceiptModel.fromJson(dynamic json) {
+  factory RecipeModel.fromJson(dynamic json) {
 
     List<String> tags = json['Tags'] != null ? new List<String>.from(json['Tags']) : new List<String>();
 
-    return ReceiptModel(
+    return RecipeModel(
         id:  json['ID'] as String,
         name: json['Name'] as String ,
         description: json['Description'] as String,
