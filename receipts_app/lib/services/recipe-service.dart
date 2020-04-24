@@ -131,7 +131,7 @@ class RecipeService{
   // Retorna um bool indicando
   //    true  : ação executada com sucesso
   //    false : ação obteve erro
-  Future<bool> deleteReceipt(String id) async {
+  Future<bool> deleteRecipe(String id) async {
 
     if(id.isEmpty){
       return false;

@@ -12,32 +12,30 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   // Lista de Receitas
-  List<RecipeModel> receipts;
-  // Armazena o widget de acordo com receipts
+  List<RecipeModel> recipes;
+  // Armazena o widget de acordo com recipe
   Widget listWidget;
 
   List<Widget> listOfWidget = new List<Widget>();
 
 
   // Buscar as receitas
-  // o resultado da busca atribui à variável receipts.
+  // o resultado da busca atribui à variável recipe.
   // será utilizado para validar qual Widget vai utilizar
-  void getAllReceipts() async{
+  void getAllRecipes() async{
 
-    RecipeService receipt = RecipeService();
+    RecipeService recipe = RecipeService();
 
-    List<RecipeModel> response = await receipt.getAll();
+    List<RecipeModel> response = await recipe.getAll();
 
     setState(() {
-      print("TEmos");
-      print(response);
-      receipts = response;
+      recipes = response;
     });
 
-    if(receipts != null) {
-      receipts.forEach((element) {
+    if(recipes != null) {
+      recipes.forEach((element) {
         setState(() {
-          listOfWidget.add(ReceiptBoxedCard(receipt: element));
+          listOfWidget.add(RecipeBoxedCard(recipe: element));
         });
       });
     }
@@ -49,7 +47,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     // Executa a busca de receipts quando inicia o State.
-    getAllReceipts();
+    getAllRecipes();
   }
 
   @override
@@ -58,10 +56,10 @@ class _HomeState extends State<Home> {
     // Verificar qual Widget utilizar
     //
     // Recipes != null  Então  ListView com itens encontrados.
-    // Receipes == null  Então  Text informando que não foram encontradas receipts.
+    // Receipes == null  Então  Text informando que não foram encontradas recipes.
     //
     // Depenendo da condição, atribui à variavel listWidget o Widget selecionado.
-    if(receipts != null)
+    if(recipes != null)
     {
       listWidget = GridView.count(
         primary: false,

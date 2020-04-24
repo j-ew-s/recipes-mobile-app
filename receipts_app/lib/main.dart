@@ -8,9 +8,9 @@ void main() {
   runApp(MaterialApp(
     routes: {
       '/' : (context) => Home(),
-      '/create-recipe' : (context) => CreateReceipt(),
-      '/detail-recipe' : (context) => DetailReceipt(),
-      '/edit-recipe' : (context) => EditReceipt(),
+      '/create-recipe' : (context) => CreateRecipe(),
+      '/detail-recipe' : (context) => DetailRecipe(),
+      '/edit-recipe' : (context) => EditRecipe(),
     },
   ));
 }

@@ -2,23 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:receiptsapp/services/recipe-service.dart';
 
-class DeleteConfirmationReceipt extends StatefulWidget {
+class DeleteConfirmationRecipe extends StatefulWidget {
   
   final String id;
-  DeleteConfirmationReceipt({this.id});
+  DeleteConfirmationRecipe({this.id});
 
 
   @override
-  _DeleteConfirmationReceiptState createState() => _DeleteConfirmationReceiptState( id : this.id);
+  _DeleteConfirmationRecipeState createState() => _DeleteConfirmationRecipeState( id : this.id);
 }
 
-class _DeleteConfirmationReceiptState extends State<DeleteConfirmationReceipt> {
+class _DeleteConfirmationRecipeState extends State<DeleteConfirmationRecipe> {
 
-  String id;
-  RecipeService receiptService = RecipeService();
+ String id;
+  RecipeService recipeService = RecipeService();
   String errorMessage = '';
 
-  _DeleteConfirmationReceiptState({this.id});
+  _DeleteConfirmationRecipeState({this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _DeleteConfirmationReceiptState extends State<DeleteConfirmationReceipt> {
         FlatButton.icon(
             color: Colors.green[300],
             onPressed: () async {
-              bool success = await receiptService.deleteReceipt(this.id);
+              bool success = await recipeService.deleteRecipe(this.id);
               if(success){
                 Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
               }

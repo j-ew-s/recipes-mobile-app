@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ReceiptBoxedCard extends StatelessWidget{
+class RecipeBoxedCard extends StatelessWidget{
 
-  final RecipeModel receipt;
+  final RecipeModel recipe;
   
-  ReceiptBoxedCard({this.receipt});
+  RecipeBoxedCard({this.recipe});
 
 
   _launchURL(String url) async {
@@ -41,7 +41,7 @@ class ReceiptBoxedCard extends StatelessWidget{
               child: Align(
                 alignment: Alignment.centerLeft,
                 child:  Text(
-                      '${receipt.getNameSized(15)}',
+                      '${recipe.getNameSized(15)}',
                       style: TextStyle(
                         fontSize: 20.0,
                         color:  Colors.white
@@ -61,7 +61,7 @@ class ReceiptBoxedCard extends StatelessWidget{
                     Navigator.pushNamed(
                         context,
                         '/detail-recipe',
-                        arguments: receipt
+                        arguments: recipe
                     );
                   },
                   icon: Icon(
@@ -74,7 +74,7 @@ class ReceiptBoxedCard extends StatelessWidget{
                 FlatButton.icon(
                   onPressed: (){
                     print('link');
-                    _launchURL(receipt.link);
+                    _launchURL(recipe.link);
                   },
                     icon: Icon(
                       Icons.link,
@@ -92,7 +92,7 @@ class ReceiptBoxedCard extends StatelessWidget{
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    '${receipt.getDescriptionSized(20)}',
+                    '${recipe.getDescriptionSized(20)}',
                     style: TextStyle(
                         fontSize: 15,
                         fontStyle: FontStyle.normal,

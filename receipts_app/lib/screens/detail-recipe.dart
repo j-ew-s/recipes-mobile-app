@@ -3,15 +3,15 @@ import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/screens/delete-confirmation-recipe.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 
-class DetailReceipt extends StatefulWidget {
+class DetailRecipe extends StatefulWidget {
 
   @override
-  _DetailReceiptState createState() => _DetailReceiptState();
+  _DetailRecipeState createState() => _DetailRecipeState();
 }
 
-class _DetailReceiptState extends State<DetailReceipt> {
+class _DetailRecipeState extends State<DetailRecipe> {
 
-  RecipeModel receipt;
+  RecipeModel recipe;
   String id;
 
   @override
@@ -22,7 +22,7 @@ class _DetailReceiptState extends State<DetailReceipt> {
       showModalBottomSheet(context: context, builder: (context){
         return Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: DeleteConfirmationReceipt(id: id),
+          child: DeleteConfirmationRecipe(id: id),
         );
       });
 
@@ -32,21 +32,21 @@ class _DetailReceiptState extends State<DetailReceipt> {
    var passedArgument = ModalRoute.of(context).settings.arguments;
 
    if(passedArgument != null){
-     receipt = passedArgument;
+     recipe = passedArgument;
    }
    else{
      List<String> aa = new List<String>();
-     receipt = RecipeModel(tags: aa , rate: 0, link: '', description: '', name: '', id: '');
+     recipe = RecipeModel(tags: aa , rate: 0, link: '', description: '', name: '', id: '');
    }
 
-   if(receipt == null){
+   if(recipe == null){
      return Loading();
    }
    else{
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.purple[700],
-          title: Text('${receipt.name} details'),
+          title: Text('${recipe.name} details'),
           actions: <Widget>[
             FlatButton.icon(
               icon: Icon(
@@ -54,7 +54,7 @@ class _DetailReceiptState extends State<DetailReceipt> {
                 color: Colors.white ,
                 ),
               onPressed: (){
-                Navigator.pushNamed(context, '/edit-recipe', arguments:  receipt
+                Navigator.pushNamed(context, '/edit-recipe', arguments:  recipe
                 );
               },
               label: Text(''),
@@ -66,7 +66,7 @@ class _DetailReceiptState extends State<DetailReceipt> {
                 color: Colors.red[300] ,
               ),
               onPressed: (){
-               _showSettings(receipt.id);
+               _showSettings(recipe.id);
               },
               label: Text(''),
             )
@@ -76,19 +76,19 @@ class _DetailReceiptState extends State<DetailReceipt> {
             children: <Widget>[
 
               Container(
-                child: Text('${receipt.name}'),
+                child: Text('${recipe.name}'),
               ),
 
               Container(
-                child: Text('${receipt.description}'),
+                child: Text('${recipe.description}'),
               ),
 
               Container(
-                child: Text('${receipt.link}'),
+                child: Text('${recipe.link}'),
               ),
 
               Container(
-                child: Text('${receipt.rate}'),
+                child: Text('${recipe.rate}'),
               ),
 
             ],
