@@ -3,14 +3,14 @@ import 'package:receiptsapp/models/recipe-model.dart';
 import 'package:receiptsapp/widgets/form-recipe.dart';
 import 'package:receiptsapp/widgets/loading.dart';
 
-class EditReceipt extends StatefulWidget {
+class EditRecipe extends StatefulWidget {
   @override
-  _EditReceiptState createState() => _EditReceiptState();
+  _EditRecipeState createState() => _EditRecipeState();
 }
 
-class _EditReceiptState extends State<EditReceipt> {
+class _EditRecipeState extends State<EditRecipe> {
 
-  RecipeModel receipt;
+  RecipeModel recipe;
   bool loading = true;
 
   @override
@@ -21,10 +21,10 @@ class _EditReceiptState extends State<EditReceipt> {
   @override
   Widget build(BuildContext context) {
 
-    var receiptArgument = ModalRoute.of(context).settings.arguments;
+    var recipeArgument = ModalRoute.of(context).settings.arguments;
 
     setState(() {
-      receipt = receiptArgument;
+      recipe = recipeArgument;
       loading = false;
     });
 
@@ -32,17 +32,17 @@ class _EditReceiptState extends State<EditReceipt> {
         return Loading();
     }
     else{
-      if(receipt == null){
+      if(recipe == null){
         return Text('Algum erro ocorrey');
       }
       else{
         return Scaffold(
           backgroundColor: Colors.purple[500],
           appBar: AppBar(
-            title: Text('Atualizando :  ${receipt.name}'),
+            title: Text('Atualizando :  ${recipe.name}'),
             backgroundColor: Colors.purple[700],
           ),
-          body: new FormRecipe(recipe: receipt),
+          body: new FormRecipe(recipe: recipe),
         );
       }
     }
