@@ -6,6 +6,7 @@ class ReceiptService{
 
   ReceiptService();
 
+  var url = 'http://10.0.2.2:8087/recipes/';
 
   // Busca todas as receipts
   //
@@ -17,13 +18,14 @@ class ReceiptService{
   // Retorna uma lista de ReceiptModel
   Future<List<ReceiptModel>> getAll() async {
 
-    var url = 'http://10.0.2.2:8061/receipts';
-
     try{
 
         List<ReceiptModel> list = new List<ReceiptModel>();
 
-        Response response = await get(url);
+        Response response = await get(this.url);
+
+        print(response.statusCode);
+        print(response.body);
 
         if(response.statusCode == 200){
 
@@ -61,19 +63,19 @@ class ReceiptService{
   // Retorna uma ReceiptModel
   Future<ReceiptModel> getById(String id) async {
 
-    var url = 'http://10.0.2.2:8061/receipts/$id';
+    //var url = 'http://10.0.2.2:8061/receipts/$id';
 
     try{
 
       ReceiptModel receipt ;
 
-      Response response = await get(url);
+      Response response = await get(this.url+id);
 
       if(response.statusCode == 200){
 
         var body = convert.jsonDecode(response.body);
 
-        var bodyReceipts = body['receipt'];
+        var bodyReceipts = body['recipe'];
 
         receipt = bodyReceipts.map((i) =>
             ReceiptModel.fromJson(i)
@@ -135,10 +137,10 @@ class ReceiptService{
     else{
       try{
 
-        var url = 'http://10.0.2.2:8061/receipts/$id';
+        //var url = 'http://10.0.2.2:8061/receipts/$id';
 
         Response response = await delete(
-          url,
+          this.url+id,
           headers:  { 'Content-type': 'application/json',
             'Accept': 'application/json'},
         );
@@ -177,13 +179,13 @@ class ReceiptService{
   //    false : ação obteve erro
   Future<bool> _create(ReceiptModel receipt) async {
 
-    var url = 'http://10.0.2.2:8061/receipts/';
+    //var url = 'http://10.0.2.2:8061/receipts/';
     Map<String, String> headers = {"Content-type": "application/json"};
 
     try{
 
       Response response = await post(
-        url,
+        this.url,
         body: receipt.toJsonInsert(),
         headers:  headers,
       );
@@ -227,13 +229,13 @@ class ReceiptService{
     print(receipt);
     print(receipt.toJson());
 
-    var url = 'http://10.0.2.2:8061/receipts/${receipt.id}';
+    //var url = 'http://10.0.2.2:8061/receipts/${receipt.id}';
     Map<String, String> headers = {"Content-type": "application/json"};
 
     try{
 
       Response response = await put(
-        url,
+        this.url+receipt.id,
         body: receipt.toJson(),
         headers: headers,
       );
